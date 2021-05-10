@@ -16,11 +16,12 @@ exports.welcome = () => {
     };
 };
 
-exports.myIssues = () => {
-    getAllIssues({}).then((issues) => {
-            return {
-                text: `Ваши задачи на сегодня: ${issues.join('.')}`,
-                tts: `<speaker audio="alice-sounds-game-win-1.opus">Ваши задачи на сегодня: ${issues.join('.')}`,
+exports.myIssues = async () => {
+    return await getAllIssues({}).then((issues) => {
+        const issuesDescription = issues.join('.')
+        return {
+                text: `Ваши задачи на сегодня: ${issuesDescription}`,
+                tts: `<speaker audio="alice-sounds-game-win-1.opus">Ваши задачи на сегодня: ${issuesDescription}`,
                 buttons: [
                     {title: 'Спасибо', hide: true},
                 ],

@@ -8,7 +8,7 @@ exports.aliceEndpoint = async(req, reply) => {
         const sessionState = state && state.session || {};
         const response = session.new
             ? replies.welcome()
-            : checkAnswer(sessionState, request.command);
+            : await checkAnswer(sessionState, request.command);
 
         return {
             response,
@@ -20,9 +20,9 @@ exports.aliceEndpoint = async(req, reply) => {
     }
 }
 
-function checkAnswer(sessionState, command) {
+checkAnswer = async(sessionState, command) => {
     if (/мои задачи/i.test(command)) {
-        return replies.myIssues();
+        return await replies.myIssues();
     }
 
     return replies.welcome();
