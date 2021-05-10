@@ -15,6 +15,7 @@ exports.getAll = async (req, reply) => {
 exports.getById = async (req, reply) => {
     try {
         const id = req.params.id
+        const t = 0
         return await issues.getById({id})
     } catch (err) {
         throw boom.boomify(err)
