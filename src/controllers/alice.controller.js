@@ -3,7 +3,7 @@ const replies = require('./../alice/replies')
 
 exports.aliceEndpoint = async(req, reply) => {
     try {
-        const { request, session, state } = req;
+        const { request, session, state } = JSON.parse(req);
         const sessionState = state && state.session || {};
         const response = session.new
             ? replies.welcome()
