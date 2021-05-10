@@ -1,8 +1,8 @@
 const boom = require('boom')
 const replies = require('./../alice/replies')
+
 exports.aliceEndpoint = async(req, reply) => {
     try {
-
         const { request, session, state } = req;
         const sessionState = state && state.session || {};
         const response = session.new

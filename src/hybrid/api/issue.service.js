@@ -16,7 +16,7 @@ exports.getAll = async({page, size, filter}) => {
                 url += `issue-filter=${filter}`
         }
         const {body} = await httpClient.client(url);
-        return body
+        return JSON.parse(body)
     } catch (err) {
         throw boom.boomify(err)
     }
@@ -26,7 +26,7 @@ exports.getById = async({id}) => {
     try {
         const url = `${hybridConfig.configuration.baseApiURL}${hybridConfig.configuration.api.issues.getById.url.replace(':id', id)}`
         const {body} = await httpClient.client.get(url)
-        return body
+        return JSON.parse(body)
     } catch (err) {
         throw boom.boomify(err)
     }
