@@ -4,8 +4,8 @@ const micro = require('micro')
 
 exports.aliceEndpoint = async(req, reply) => {
     try {
-        console.log(req)
-        const { request, session, state } = await micro.json(req.body);
+        console.log(req.body)
+        const { request, session, state } = JSON.parse(req.body);
         const sessionState = state && state.session || {};
         const response = session.new
             ? replies.welcome()
