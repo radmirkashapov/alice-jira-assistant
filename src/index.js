@@ -38,8 +38,8 @@ mongoose.connect("mongodb+srv://BCSAdmin:YA35kUEzURnayYf@cluster0.mrofz.mongodb.
 const start = async () => {
     try {
         const port = process.env.PORT
-        //await fastify.listen(port, '0.0.0.0')
-        await fastify.listen(63257, '0.0.0.0')
+        await fastify.listen(port, '0.0.0.0')
+        //await fastify.listen(63257, '0.0.0.0')
         fastify.swagger()
         fastify.log.info(`server listening on ${port}`)
     } catch (err) {
