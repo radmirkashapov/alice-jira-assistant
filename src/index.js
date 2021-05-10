@@ -16,15 +16,19 @@ fastify.register(require('fastify-swagger'), swagger.options)
 fastify.register(require('fastify-cors'))
 
 
-const issuesRoute = require('./routes/issues.route')
+const issuesRoutes = require('./routes/issues.route')
+const aliceRoutes = require('./routes/alice.route')
 
-issuesRoute.forEach((route, index) => {
+issuesRoutes.forEach((route, index) => {
     fastify.route(route)
 })
 
+aliceRoutes.forEach((route, index) => {
+    fastify.route(route)
+})
 
 // Connect to DB
-mongoose.connect("mongodb://localhost:27017/alice-jira-assistant", {useNewUrlParser: true, useUnifiedTopology: true})
+mongoose.connect("mongodb+srv://BCSAdmin:YA35kUEzURnayYf@cluster0.mrofz.mongodb.net/alice-jira-assistant", {useNewUrlParser: true, useUnifiedTopology: true})
     .then(() => console.log('MongoDB connected...'))
     .catch(err => console.log(err))
 
@@ -33,10 +37,11 @@ mongoose.connect("mongodb://localhost:27017/alice-jira-assistant", {useNewUrlPar
 // Run the server!
 const start = async () => {
     try {
-        //await fastify.listen(process.env.PORT, '0.0.0.0')
-        await fastify.listen(63257, '0.0.0.0')
+        const port = process.env.PORT
+        await fastify.listen(port, '0.0.0.0')
+        //await fastify.listen(63257, '0.0.0.0')
         fastify.swagger()
-        fastify.log.info(`server listening on ${fastify.server.address().port}`)
+        fastify.log.info(`server listening on ${port}`)
     } catch (err) {
         fastify.log.error(err)
         process.exit(1)
