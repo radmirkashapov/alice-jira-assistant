@@ -41,8 +41,8 @@ getAllIssues = async ({page, size, filter}) => {
         let issues = await issuesService.getAll({page, size, filter})
 
         return await Promise.all(issues.tasks.map((task) => {
-            const description = task.task.descriptionShort.replace(/<[^>]+>/g, '')
-            return `Проект: ${task.project.name}.Задача: ${task.task.key}. ${task.task.name}. ${description}`
+            const priority = `Приоритет: ${task.task.priority}`
+            return `Проект: ${task.project.name}.Задача: ${task.task.key}. ${task.task.name}. ${priority}`
         }))
     } catch (err) {
         throw boom.boomify(err)
