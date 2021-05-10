@@ -1,21 +1,26 @@
 const hybridConfig = require('./../config/hybrid.config')
 const boom = require('boom')
 const httpClient = require('./../../core/got.client')
+const buildUrl = require('build-url')
 
 
 exports.getAll = async({page, size, filter}) => {
     try {
-        let url = `${hybridConfig.configuration.baseApiURL}${hybridConfig.configuration.api.issues.getAll.url}`
-        if(page || size || filter) {
-            url += '?'
-            if(page !== undefined)
-                url += `page=${page}`
-            if(size !== undefined)
-                url += `size=${size}`
-            if(filter !== undefined)
-                url += `issue-filter=${filter}`
+        let queryParams = {
+            page: page,
+            size: size
         }
-        const {body} = await httpClient.client(url);
+        queryParams['issue-filter'] = filter
+
+        const uri = buildUrl(
+            hybridConfig.configuration.baseApiURL,
+            {
+                path: hybridConfig.configuration.api.issues.getAll.url,
+                queryParams: queryParams
+            }
+        )
+        const f = 0
+        const {body} = await httpClient.client(uri);
         return JSON.parse(body)
     } catch (err) {
         throw boom.boomify(err)

@@ -17,7 +17,7 @@ exports.welcome = () => {
 };
 
 exports.myIssues = async () => {
-    return await getAllIssues({page: 0, size:3, filter:'SPRINT'}).then((issues) => {
+    return await getAllIssues({page: 0, size:3}).then((issues) => {
         const issuesDescription = issues.join('.')
         return {
                 text: `Ваши задачи на сегодня: ${issuesDescription}`,
