@@ -1,11 +1,10 @@
 const boom = require('boom')
 const replies = require('./../alice/replies')
-const micro = require('micro')
 
 exports.aliceEndpoint = async(req, reply) => {
     try {
         console.log(req.body)
-        const { request, session, state } = JSON.parse(req.body);
+        const { request, session, state } = req.body;
         const sessionState = state && state.session || {};
         const response = session.new
             ? replies.welcome()
