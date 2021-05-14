@@ -1,4 +1,4 @@
-const issueController = require('../controllers/issues.controller')
+const issueController = require('../controllers/issues-api.controller')
 
 const routes = [
     {

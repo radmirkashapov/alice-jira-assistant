@@ -25,5 +25,5 @@ checkAnswer = async(sessionState, command) => {
         return await replies.myIssues();
     }
 
-    return replies.welcome();
+    return replies.noSuchCommand();
 }
