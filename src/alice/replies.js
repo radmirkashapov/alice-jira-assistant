@@ -52,14 +52,19 @@ exports.myIssues = async () => {
 
 exports.createWorklog = async ({projectName, issueKey, comment, timeSpentSeconds}) => {
 
-    const issueId = await getIssueByProjectAndKey({projectName, issueKey}).issueId
-    await worklogApiService.startTracking({issueId})
+    let issue = {}
+    const issueE = await getIssueByProjectAndKey({projectName, issueKey}).then((t) => {
+        issue = t
+    });
+    const issueId = issue.id;
+    const tdvvdv = 0;
+    await worklogApiService.startTracking({issueId: issueId})
     const time  = timeSpentSeconds < 60 ? 60 : timeSpentSeconds
-    await worklogApiService.stopTracking({issueId, comment, time})
+    await worklogApiService.stopTracking({issueId: issueId, comment: comment, timeSpentSeconds: time})
 
     return {
-        text: `Занес запись ${comment} ${time / 60.0} минут по задаче ${issueKey} проекта ${projectName}`,
-        tts: `Занес запись ${comment} ${time / 60.0} минут по задаче ${issueKey} проекта ${projectName}`,
+        text: `Занес запись ${comment.join(' ')} ${time / 60.0} минут по задаче ${issueKey} проекта ${projectName}`,
+        tts: `Занес запись ${comment.join(' ')} ${time / 60.0} минут по задаче ${issueKey} проекта ${projectName}`,
         buttons: [
             {title: 'Спасибо', hide: true},
         ],
@@ -75,6 +80,15 @@ function getRandomElement(arr) {
 getAllIssues = async ({page, size, filter}) => {
     try {
         let issues = await issuesApiService.getAll({page, size, filter})
+        issues.tasks.forEach((t)=> {
+            issueController.upsertIssue({id: undefined, issue: {
+                    id: t.id,
+                    keyNumber: t.task.key.replace(`${t.project.key}-`,''),
+                    name: t.task.descriptionShort,
+                    projectKey: t.project.key,
+                    projectName: t.project.name
+            }})
+        })
 
         return await Promise.all(issues.tasks.map((task) => {
             const priority = `Приоритет: ${task.task.priority}`
@@ -87,7 +101,7 @@ getAllIssues = async ({page, size, filter}) => {
 
 getIssueByProjectAndKey = async ({projectName, issueKey}) => {
     try {
-        const issue = await issueController.getByProjectAndKey({projectName, issueKey})
+        const issue = await issueController.getByProjectAndKey({projectName, taskKeyNumber: issueKey})
         return issue
     } catch (err) {
         throw boom.boomify(err)
