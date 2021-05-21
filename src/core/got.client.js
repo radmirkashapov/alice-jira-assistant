@@ -6,7 +6,7 @@ exports.client = got.extend({
     hooks: {
         beforeRequest: [
             options => {
-                options.headers['Authorization'] = 'Bearer eyJhbGciOiJSUzI1NiJ9.eyJzdWIiOiIxMjUiLCJlbWFpbCI6InJrYXNoYXBvdkBza29sb3BlbmRyYS5jb20iLCJyb2wiOlsiUk9MRV9VU0VSIl0sImlzcyI6Imh5YnJpZC5sb2NhbGhvc3QiLCJpYXQiOjE2MjEwNjUyODAsImV4cCI6MTYyMTE1MTY4MH0.K3WujCLT88X_ow1OdAU5m98HHEyleJdZMWABdXYyAtsMDmerWcVqGMv6E9RR-B2OJ-hsYaasMWFrcj0_jW7edoJzVx7BEtj27YFZ5NTw7pJKiGmrvdyWIFZ-7OpOBq-sT-TI8620cv8DsnRft1n59tNm5RBsPYJFoE301m15RCo90nvS40m_JSbFSkedlT9pDoNcq3n7lo8c3irIMg-7lynYQEBpst7VnckiuPDAeBTiSNlVcpvFIaMphkUfEnQwaPlrFozJ1sMkM1u29YOK8oDZu_dyclq5fNYLmLiavgEVPcH5YAjmy8B_jXkNLEKpjnOFh7hyrg1e-jsXHG96mQ';
+                options.headers['Authorization'] = 'Bearer eyJhbGciOiJSUzI1NiJ9.eyJzdWIiOiIxMjUiLCJlbWFpbCI6InJrYXNoYXBvdkBza29sb3BlbmRyYS5jb20iLCJyb2wiOlsiUk9MRV9VU0VSIl0sImlzcyI6Imh5YnJpZC5sb2NhbGhvc3QiLCJpYXQiOjE2MjE2MTg5ODAsImV4cCI6MTYyMTcwNTM4MH0.s6QxSfplvEOVYjQqXJBvCEopXPP_lreR-IKmg__N3a2_nteWk1htEuA6fnIOOe7wB8BBxI4Z0e7N4AJ4wwr85hmB2xSX9t6OcYEO26p_6PUBEE-5ysP9Bw-Tk-svGTIwyYd1Y7kUsQozfvJ7uxzTJT8Ewrxtv-0CFbVkGQim4XDFLOCycm8vSjB_ManmtNdS3ttL_315dkyDP2XWWG_oKaD1mJ23vM8clL1riqoEoKRonH41HUViGC5lDqDm42Zm5m2MswIejo80L9qsqaMdm2dKramlL2WFFNZVA4aZEebjnTFcFPB5un9HWrfCTjDbsFSsmkfra2_UwtpYT89jtw';
             }
         ]
     }

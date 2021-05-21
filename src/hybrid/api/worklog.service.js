@@ -8,7 +8,7 @@ exports.startTracking = async({issueId}) => {
         const response = await httpClient.client.post(url)
         return response.ok
     } catch (err) {
-        throw boom.boomify(err)
+        console.log(err)
     }
 }
 
@@ -17,7 +17,7 @@ exports.stopTracking = async({issueId, comment, timeSpentSeconds}) => {
         const url = `${hybridConfig.configuration.baseApiURL}${hybridConfig.configuration.api.worklogs.stopTracking.url.replace('{issueMetaId}', issueId)}`
         const response = await httpClient.client.put(url, {
             json: {
-                comment: comment,
+                comment: comment.join(''),
                 timeSpentSeconds: timeSpentSeconds
             },
             responseType: 'json'

@@ -1,5 +1,5 @@
 exports.configuration = {
-    baseApiURL: 'http://api.perso.hybrid-zero.com',
+    baseApiURL: 'http://dev.hybrid-zero.com',
     api: {
         issues: {
             getAll: {
