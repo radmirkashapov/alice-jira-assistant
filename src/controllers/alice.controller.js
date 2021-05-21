@@ -26,25 +26,33 @@ checkAnswer = async(sessionState, command) => {
     }
 
     let commandSplitted = command.split(' ');
-    if (commandSplitted[1].toLowerCase() === "задачу") {
-        const issueKey = commandSplitted[2];
-        if (commandSplitted[3].toLowerCase() === "проекта") {
-            let project = "";
-            switch (commandSplitted[4].toLowerCase()) {
-                case "гибрид":
-                    project = "HYBZ"
-                    break;
-                case "яндекс":
-                    project = "YTSS"
-                    break;
-                default: "тикер"
-                    project = "TEEQ"
-                    break;
-            }
-            if (commandSplitted[5] === "запиши") {
-                const minutes = commandSplitted[6];
-                const comment = commandSplitted.slice(8);
-                return await replies.createWorklog({projectName: project, issueKey, comment: comment, timeSpentSeconds: minutes * 60})
+    if(commandSplitted.length > 3) {
+        if (commandSplitted[1].toLowerCase() === "задачу") {
+            const issueKey = commandSplitted[2];
+            if (commandSplitted[3].toLowerCase() === "проекта") {
+                let project = "";
+                switch (commandSplitted[4].toLowerCase()) {
+                    case "гибрид":
+                        project = "HYBZ"
+                        break;
+                    case "яндекс":
+                        project = "YTSS"
+                        break;
+                    default:
+                        "тикер"
+                        project = "TEEQ"
+                        break;
+                }
+                if (commandSplitted[5] === "запиши") {
+                    const minutes = commandSplitted[6];
+                    const comment = commandSplitted.slice(8);
+                    return await replies.createWorklog({
+                        projectName: project,
+                        issueKey,
+                        comment: comment,
+                        timeSpentSeconds: minutes * 60
+                    })
+                }
             }
         }
     }
